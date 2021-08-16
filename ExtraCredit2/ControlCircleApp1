@@ -1,0 +1,142 @@
+/*
+Author: Justin Ong
+Date: 2 Dec 2017
+Course: CS111B
+Extra Credit Assignment #2
+Objective:
+ - Applet that has a circle and 6 buttons
+ - Buttons can move, inflate, and deflate circle
+ - Circle cannot go beyond buttons
+*/
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ControlCircleApp
+{
+    static class ButtonsCircleFrame extends Frame
+    {
+        private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        private Double w = screenSize.getWidth();
+        private Double h = screenSize.getHeight();
+        private int x = w.intValue()/2;
+        private int y = h.intValue()/2;
+        private int a = 100;
+        private int b = 100;
+
+        private Button deflate;
+
+        //*****************************constructor*****************************
+        public ButtonsCircleFrame()
+        {
+            Button left = new Button("Left");
+            Button up = new Button("Up");
+            Button right = new Button("Right");
+            Button down = new Button("Down");
+            Button inflate = new Button("Inflate");
+            deflate = new Button("Deflate");
+            add(left);
+            add(up);
+            add(right);
+            add(down);
+            add(inflate);
+            add(deflate);
+            setSize(w.intValue(), h.intValue());
+            setTitle("Shape and Buttons");
+            setLayout(new FlowLayout());
+            setVisible(true);
+
+            left.addActionListener(new LeftListener());
+            up.addActionListener(new UpListener());
+            right.addActionListener(new RightListener());
+            down.addActionListener(new DownListener());
+            inflate.addActionListener(new InflateListener());
+            deflate.addActionListener(new DeflateListener());
+        }
+
+        //*****************************LeftListener*****************************
+        class LeftListener implements ActionListener
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                x -= 10;
+                repaint();
+            }
+        }
+
+        //*****************************UpListener*****************************
+        class UpListener implements ActionListener
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                int maxY = deflate.getLocation().y + deflate.getHeight();
+                int tmpY = y;
+                y -= 10;
+
+                if ( y >= maxY)
+                {
+                    repaint();
+                }
+                else
+                {
+                    y = tmpY;
+                }
+            }
+        }
+
+        //*****************************RightListener*****************************
+        class RightListener implements ActionListener
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                x += 10;
+                repaint();
+            }
+        }
+
+        //*****************************DownListener*****************************
+        class DownListener implements ActionListener
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                y += 10;
+                repaint();
+            }
+        }
+
+        //*****************************InflateListener*****************************
+        class InflateListener implements ActionListener
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                a += 10;
+                b += 10;
+                repaint();
+            }
+        }
+
+        //*****************************DeflateListener*****************************
+        class DeflateListener implements ActionListener
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                a -= 10;
+                b -= 10;
+                repaint();
+            }
+        }
+
+        //*****************************paint()*****************************
+        public void paint(Graphics g)
+        {
+            g.setColor(Color.orange);
+            g.fillOval(x, y,a,b);
+        }
+    }
+
+    //*****************************main()*****************************
+    public static void main(String args[])
+    {
+        ButtonsCircleFrame buttonsCircleFrame = new ButtonsCircleFrame();
+    }
+}

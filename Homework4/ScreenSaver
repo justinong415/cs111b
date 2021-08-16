@@ -1,0 +1,103 @@
+/*
+Author:Justin Ong
+Date:6 Nov 2017
+Course:CS111B
+Homework Assignment: #4 ScreenSaver.java
+Objective:
+ -create a screensaver applet that will generate random circles or triangles 
+ -applet window must be size of entire screen
+ -shapes will be filled with (randomized) color
+ -override used to prevent shapes from disappearing
+ -program is continuous
+ -use sleep to slow down
+*/
+
+import java.applet.Applet;
+import java.awt.*;
+import java.util.Random;
+
+/*
+<applet code="ScreenSaver" width=w height=h>
+<param name="shape" value="circle">
+</applet>
+*/
+
+public class ScreenSaver extends Applet
+{
+    private String shape;
+
+    //*****************************init()*****************************
+    public void init()
+    {
+        // sets the default applet window size
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Double w = screenSize.getWidth();
+        Double h = screenSize.getHeight();
+        this.setSize(w.intValue(), h.intValue());
+
+        String defaultShape = "circle";
+
+        shape = getParameter("shape");
+        if (shape == null || shape.equals(""))
+        {
+            shape = defaultShape;
+        }
+
+        System.out.println(shape);
+        //create a circle graphic
+        update(this.getGraphics());
+    }
+
+    //*****************************destroy()*****************************
+    public void destroy()
+    {
+        //do something on destroy
+    }
+
+    //*****************************update()*****************************
+    public void update(Graphics g)
+    {
+        while(1==1)
+        {
+            paint(g);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+
+            }
+        }
+    }
+
+    //*****************************paint()*****************************
+    public void paint(Graphics g)
+    {
+        int w = this.getWidth();
+        int h = this.getHeight();
+
+        // random number generators for shapes
+        Random random = new Random();
+        int randX = random.nextInt(w) + 0;
+        int randY = random.nextInt(h) + 0;
+        int randWH = random.nextInt(w) + 0;
+
+        // random number generators for colors
+        int red = random.nextInt(255) + 0;
+        int blue = random.nextInt(255) + 0;
+        int green = random.nextInt(255) + 0;
+        Color c = new Color(red, blue, green);
+
+        if (shape.equals("circle"))
+        {
+            g.setColor(c);
+            g.fillOval(randX, randY, randWH, randWH);
+        }
+        else if (shape.equals("triangle"))
+        {
+            g.setColor(c);
+            int xpoints[] = {randWH, randX, randY};
+            int ypoints[] = {randX, randY, randWH};
+            int num = 3;
+            g.fillPolygon(xpoints, ypoints, num);
+        }
+    }
+}

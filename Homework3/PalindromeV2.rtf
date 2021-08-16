@@ -1,0 +1,93 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww15680\viewh14640\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs28 \cf0 /*\
+Author: Justin Ong\
+Date: 30 Sep 2017\
+Course: CS111B\
+Homework Assignment: #3\
+Objective:\
+  This Assignment does the following-\
+    1. Asks users to input a string through Scanner\
+    2. Check for sentinel data immediately after receiving input\
+    3. Filter method keep only alphanumeric characters\
+    4. Method that takes in one argument to check if word is a palindrome\
+*/\
+import java.util.Scanner;\
+\
+class Palindrome\
+\{\
+    public static String filter(String str)\
+    \{\
+        String filtered = "";\
+\
+        for(int i = 0; i < str.length(); i++)\
+        \{\
+            char c = str.charAt(i);\
+            if(Character.isLetterOrDigit(c))\
+            \{\
+                filtered += c;\
+            \}\
+        \}\
+        return(filtered.toLowerCase());\
+    \}\
+\
+    public static boolean palindromeCheck(String forward)\
+    \{\
+        String reverse = "";\
+        int length = forward.length();\
+\
+        for(int i = length - 1; i >= 0; i--)\
+        \{\
+            reverse = reverse + forward.charAt(i);\
+        \}\
+\
+        if (forward.equals(reverse))\
+            return true;\
+        else\
+            return false;\
+    \}\
+\
+    public static void main(String args[])\
+    \{\
+        for(;;)\
+        \{\
+            Scanner scan = new Scanner(System.in);\
+            System.out.print("Enter a string, or 'exit' to stop: ");\
+            String original = scan.nextLine();\
+\
+            if(original.equals("exit"))\
+                break;\
+\
+            String filtered = filter(original);\
+\
+            if (palindromeCheck(filtered) == true)\
+                System.out.println("Your string " + filtered + " is a Palindrome!");\
+            else\
+                System.out.println("Your string " + filtered + " is NOT a palindrome!");\
+        \}\
+\
+        System.out.println("Goodbye!");\
+    \}\
+\}\
+\
+/* Output\
+\
+Enter a string, or 'exit' to stop: hello world!\
+Your string helloworld is NOT a palindrome!\
+Enter a string, or 'exit' to stop: A santa at NASA\
+Your string asantaatnasa is a Palindrome!\
+Enter a string, or 'exit' to stop: Madam I'm Adam!!\
+Your string madamimadam is a Palindrome!\
+Enter a string, or 'exit' to stop:      Abbas @!!??\
+Your string abbas is NOT a palindrome!\
+Enter a string, or 'exit' to stop: Noon@@@@!!\
+Your string noon is a Palindrome!\
+Enter a string, or 'exit' to stop: exit\
+Goodbye!\
+*/\
+}

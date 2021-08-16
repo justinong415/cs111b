@@ -1,0 +1,118 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww16520\viewh13440\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs28 \cf0 /*\
+Author: Justin Ong\
+Date: 25 Sep 2017\
+Course: CS111B\
+Homework Assignment: #2\
+Objective:\
+  This Assignment does the following-\
+    1. Creates an array with 100 elements\
+    2. Has static method 'fillup' plug random numbers between 1-500 into array\
+    3. Has static method "average" to calculate and return average of array\
+    4. Has static method "largest" to find and return largest number in array\
+    5. Has static method "smallest" to return the smallest number in array\
+    6. Has static method "printArray" that prints all the numbers in array\
+*/\
+import java.util.Arrays;\
+import java.util.Random;\
+\
+class DemoArray\
+\{\
+    public static void main(String args[])\
+    \{\
+        int array[] = new int[100];\
+        fillup(array);\
+\
+        System.out.println("The average of the array is: " + average(array));\
+        System.out.println("The largest int in the array is: " + largest(array));\
+        System.out.println("The smallest int in the array is: " + smallest(array));\
+        System.out.println("The elements in the array are: " + "\\n" + printArray(array));\
+    \}\
+\
+    public static int[] fillup(int[] fillupArrayVar)\
+    \{\
+        int[] filledupArray = fillupArrayVar;\
+\
+        Random rand = new Random();\
+        for (int i = 0; i < filledupArray.length; i++)\
+        \{\
+            int n = rand.nextInt(500) + 1;\
+            filledupArray[i] += n;\
+        \}\
+\
+        return filledupArray;\
+    \}\
+\
+    public static int average(int[] averageArrayVar)\
+    \{\
+        int[] avgArray = averageArrayVar;\
+        int total = 0;\
+        int avg = 0;\
+\
+        for (int i = 0; i < avgArray.length; i++)\
+        \{\
+            total += avgArray[i];\
+        \}\
+\
+        avg = (total / avgArray.length);\
+        return avg;\
+    \}\
+\
+    public static int largest(int[] maxArrayVar)\
+    \{\
+        int[] maxArray = maxArrayVar;\
+        int max = 0;\
+\
+        for (int i = 0; i < maxArray.length; i++)\
+        \{\
+            if(max < maxArray[i])\
+            \{\
+                max = maxArray[i];\
+            \}\
+        \}\
+        return max;\
+    \}\
+\
+    public static int smallest (int[] smallestArrayVar)\
+    \{\
+        int[] smallArray = smallestArrayVar;\
+        int small = 501;\
+\
+        for (int i = 0; i < smallArray.length; i++)\
+        \{\
+            if(small > smallArray[i])\
+            \{\
+                small = smallArray[i];\
+            \}\
+        \}\
+        return small;\
+    \}\
+\
+    public static String printArray(int[] printArrayVar)\
+    \{\
+        int[] arrayToPrint = printArrayVar;\
+        return Arrays.toString(arrayToPrint);\
+    \}\
+\}\
+\
+// Output\
+The average of the array is: 223\
+The largest int in the array is: 500\
+The smallest int in the array is: 3\
+The elements in the array are: \
+[406, 81, 192, 157, 452, 172, 150, 12, 72, 144,\
+ 267, 112, 239, 255, 407, 165, 294, 217, 72, 385, \
+ 159, 289, 165, 300, 192, 49, 168, 47, 447, 406, \
+ 94, 493, 500, 293, 307, 126, 29, 157, 358, 420, \
+ 244, 209, 100, 283, 455, 65, 296, 68, 141, 461, \
+ 192, 14, 77, 194, 242, 402, 100, 414, 66, 257, \
+ 252, 311, 421, 224, 160, 3, 179, 139, 444, 319, \
+ 299, 131, 153, 338, 443, 248, 103, 146, 199, 35, \
+ 166, 490, 202, 429, 19, 47, 164, 16, 336, 29, \
+ 283, 218, 427, 304, 321, 21, 213, 365, 68, 194]}
